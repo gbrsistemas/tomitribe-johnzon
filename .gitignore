@@ -1,0 +1,7 @@
+target/
+*.iml
+.idea/
+.settings/
+vcs.xml
+.idea
+.DS_Store

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<resources>
+  <Service id="johnzon" class-name="br.com.gbrsistemas.crvirtual.util.converter.CustomDateProvider">
+    accessModeName = field
+    adapter = java.util.Date/java.lang.String/br.com.gbrsistemas.crvirtual.util.converter.DateTimeAdapter
+  </Service>
+</resources>

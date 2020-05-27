@@ -19,6 +19,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
@@ -58,10 +60,27 @@ public class UsuarioServiceTest {
 
     @Test
     public void testUsuarios() {
+        final ParameterizedType pt = new ParameterizedType() {
+
+            @Override
+            public Type[] getActualTypeArguments() {
+                return new Type[] { Usuario.class };
+            }
+
+            @Override
+            public Type getRawType() {
+                return Resultado.class;
+            }
+
+            @Override
+            public Type getOwnerType() {
+                return null;
+            }
+        };
+
         Response response = target.request().accept(MediaType.APPLICATION_JSON).get();
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-        Resultado<Usuario> usuarios = response.readEntity(new GenericType<Resultado<Usuario>>() {
-        });
+        Resultado<Usuario> usuarios = response.readEntity(new GenericType<Resultado<Usuario>>(pt));
         assertNotNull(usuarios);
     }
 
